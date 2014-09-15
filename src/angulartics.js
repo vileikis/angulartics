@@ -37,7 +37,7 @@ angular.module('angulartics', [])
     eventTracking: {},
     bufferFlushDelay: 1000 // Support only one configuration for buffer flush delay to simplify buffering
   };
-  
+  settings.pageTracking.autoTrackFirstPage = false;
   // List of known handlers that plugins can register themselves for
   var knownHandlers = [
     'pageTrack',
