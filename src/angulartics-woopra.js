@@ -37,7 +37,7 @@ angular.module('angulartics.woopra', ['angulartics'])
 
     function track (action, properties) {
 
-      if (isFirstTime) {
+      if (isFirstTime && action === 'pv') {
 
         setTimeout(function () {
           woopra.track(action, properties);
