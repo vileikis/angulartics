@@ -14,8 +14,6 @@
 angular.module('angulartics.woopra', ['angulartics'])
 .config(['$analyticsProvider', function ($analyticsProvider) {
 
-    var isFirstTime = true;
-
     $analyticsProvider.registerSetUserProperties(function (properties) {
       if (angular.isObject(properties) && angular.isString(properties.email)) {
         woopra.identify(properties);
@@ -24,28 +22,15 @@ angular.module('angulartics.woopra', ['angulartics'])
       }
     });
 
-
     $analyticsProvider.registerPageTrack(function (path) {
-      track('pv', {
+      woopra.track('pv', {
         url: path
       });
     });
 
     $analyticsProvider.registerEventTrack(function (action, properties) {
-      track(action, properties);
+      woopra.track(action, properties);
     });
 
-    function track (action, properties) {
-
-      if (isFirstTime && action === 'pv') {
-
-        setTimeout(function () {
-          woopra.track(action, properties);
-          isFirstTime = false;
-        }, 3000);
-      } else {
-        woopra.track(action, properties);
-      }
-    }
 }]);
 })(angular);
